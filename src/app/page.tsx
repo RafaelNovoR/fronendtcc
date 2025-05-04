@@ -17,7 +17,7 @@ export default function Home() {
   useEffect(() => {
     const fetchPopulationData = async () => {
       try {
-        const response = await fetch("http://localhost:8080/api/v1/population");
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/population`)
         if (!response.ok) {
           throw new Error("Failed to fetch population data");
         }
