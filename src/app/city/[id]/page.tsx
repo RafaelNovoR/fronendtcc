@@ -81,7 +81,7 @@ export default function Page({ params }: { params: { id: string } }) {
     const fetchPopulationData = async () => {
       try {
         const response = await fetch(
-          `http://localhost:8080/api/v1/population/${cityId}`
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}/population/${cityId}`
         );
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
