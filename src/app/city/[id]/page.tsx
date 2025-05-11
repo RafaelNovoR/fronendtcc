@@ -15,7 +15,7 @@ import { Bar } from "react-chartjs-2";
 ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip, Legend);
 
 const cityBairrosMap: Record<string, any> = {
-"Biguaçu": [
+Biguaçu: [
 { name: "Fundos", population: 8000, area: 11.2, increase: 2.1 },
 { name: "Saveiro", population: 6500, area: 8.5, increase: -1.3 },
 { name: "Jardim Janaina", population: 9000, area: 7.3, increase: 3.2 },
@@ -36,7 +36,7 @@ const cityBairrosMap: Record<string, any> = {
 { name: "Santa Luzia", population: 2700, area: 12.1, increase: 2.4 },
 { name: "Rachadel", population: 3200, area: 9.8, increase: 3.1 },
 ],
-"Palhoça": [
+Palhoça: [
 { name: "Ponte do Imaruim", population: 11000, area: 9.5, increase: 1.8 },
 { name: "Pagani", population: 9000, area: 6.4, increase: 2.9 },
 { name: "Bela Vista", population: 8700, area: 7.8, increase: 0.2 },
@@ -54,7 +54,12 @@ const cityBairrosMap: Record<string, any> = {
 { name: "Centro", population: 2000, area: 3.2, increase: 0.5 },
 { name: "Linha São Roque", population: 1700, area: 2.8, increase: -0.1 },
 { name: "Linha Cambucica", population: 1900, area: 3.5, increase: 1.0 },
-{ name: "Linha Santa Terezinha", population: 1600, area: 2.4, increase: 0.7 },
+{
+name: "Linha Santa Terezinha",
+population: 1600,
+area: 2.4,
+increase: 0.7,
+},
 { name: "Linha Barrinha", population: 1800, area: 3.0, increase: 1.3 },
 ],
 "São Pedro de Alcântara": [
@@ -67,11 +72,16 @@ const cityBairrosMap: Record<string, any> = {
 "São Carlos": [
 { name: "Centro", population: 5000, area: 6.1, increase: 2.0 },
 { name: "Linha Alto Bonito", population: 4600, area: 7.2, increase: 1.6 },
-{ name: "Linha São Sebastião", population: 4300, area: 6.3, increase: -0.4 },
+{
+name: "Linha São Sebastião",
+population: 4300,
+area: 6.3,
+increase: -0.4,
+},
 { name: "Linha Bela Vista", population: 4100, area: 5.5, increase: 1.9 },
 { name: "Linha São Pedro", population: 4000, area: 6.0, increase: 0.3 },
 ],
-"Florianópolis": [
+Florianópolis: [
 { name: "Centro", population: 25000, area: 15.6, increase: 2.7 },
 { name: "Trindade", population: 20000, area: 12.3, increase: 1.8 },
 { name: "Ingleses", population: 18000, area: 10.7, increase: 3.4 },
@@ -80,6 +90,17 @@ const cityBairrosMap: Record<string, any> = {
 ],
 };
 
+const cityMapLinks: any = {
+"Florianópolis": "https://www.openstreetmap.org/relation/296561",
+"São José": "https://www.openstreetmap.org/relation/296626",
+"Palhoça": "https://www.openstreetmap.org/relation/296582",
+"Biguaçu": "https://www.openstreetmap.org/relation/296705",
+"Santo Amaro da Imperatriz": "https://www.openstreetmap.org/relation/296642",
+"Governador Celso Ramos": "https://www.openstreetmap.org/relation/296600",
+"Antônio Carlos": "https://www.openstreetmap.org/relation/296793",
+"Águas Mornas": "https://www.openstreetmap.org/relation/296576",
+"São Pedro de Alcântara": "https://www.openstreetmap.org/relation/296766",
+};
 
 export default function Page({ params }: { params: { id: string } }) {
 const [populationData, setPopulationData] = useState<any | null>(null);
@@ -103,7 +124,7 @@ textAlign: "left",
 position: "relative",
 cursor: "pointer", // Change cursor to pointer
 transition: "transform 0.3s, box-shadow 0.3s",
-marginBottom: 10// Smooth transition
+marginBottom: 10, // Smooth transition
 };
 
 const bairroCardHoverStyle = {
@@ -193,7 +214,41 @@ marginRight: "20px",
 textAlign: "left",
 }}
 >
-<h2 style={{ fontSize: "24px", marginBottom: "10px" }}>{cityName}</h2>
+<div
+style={{
+display: "flex",
+justifyContent: "space-between",
+alignItems: "center",
+marginBottom: "20px",
+}}
+>
+<h2 style={{ fontSize: "28px", margin: 0 }}>{cityName}</h2>
+{cityMapLinks[cityName] && (
+<a
+href={cityMapLinks[cityName]}
+target="_blank"
+rel="noopener noreferrer"
+style={{
+padding: "10px 16px",
+backgroundColor: "#2980b9",
+color: "white",
+borderRadius: "6px",
+textDecoration: "none",
+fontSize: "16px",
+fontWeight: "bold",
+transition: "background-color 0.3s ease",
+}}
+onMouseOver={(e) =>
+(e.currentTarget.style.backgroundColor = "#1c6690")
+}
+onMouseOut={(e) =>
+(e.currentTarget.style.backgroundColor = "#2980b9")
+}
+>
+VER MAPA
+</a>
+)}
+</div>
 <p style={{ fontSize: "18px", marginBottom: "10px" }}>
 <strong>Microregion:</strong> {microrregiaoName}
 </p>
